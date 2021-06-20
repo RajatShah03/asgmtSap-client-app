@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';
 
@@ -35,8 +35,8 @@ const Header = () => {
             App
           </Typography>
           {links.map(link => (
-            <>
-              <Typography key={link.to} variant='h6'>
+            <Fragment key={link.to}>
+              <Typography variant='h6'>
                 <Link
                   to={link.to}
                 >
@@ -45,7 +45,7 @@ const Header = () => {
               </Typography>
               &nbsp;
               &nbsp;
-            </>
+            </Fragment>
           ))}
         </Toolbar>
       </AppBar>

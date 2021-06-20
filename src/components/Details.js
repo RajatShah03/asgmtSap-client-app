@@ -53,6 +53,7 @@ const Details = () => {
       </Typography>
       <br />
       <Grid container className={classes.root} spacing={4}>
+        {(!users || users.length === 0) ? 'No users found' : null}
         {users.map(user => (
           <Grid key={user._id} item xs={users.length < 3 ? 4 : 3}>
             <UserCard

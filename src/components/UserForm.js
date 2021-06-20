@@ -77,7 +77,6 @@ const UserForm = () => {
   const handleSubmit = async (event) => {
     if (event) event.preventDefault();
     if (isValid(formData)) {
-      console.log(formData);
       setSubmitting(true);
       try {
         const response = await addUser(formData);
