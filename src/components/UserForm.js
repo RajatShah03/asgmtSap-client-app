@@ -56,11 +56,16 @@ const UserForm = () => {
     password: ''
   };
 
+  const emptyFormMessage = {
+    type: '',
+    msg: ''
+  };
+
   const classes = useStyles();
 
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState(emptyFormData);
-  const [formMessage, setFormMessage] = useState('');
+  const [formMessage, setFormMessage] = useState(emptyFormMessage);
   const [showPass, setShowPass] = useState(false);
 
   const isValid = (data) => {
@@ -81,15 +86,19 @@ const UserForm = () => {
       try {
         const response = await addUser(formData);
         if (response.data) {
-          setFormMessage('Successfully added user');
+          setFormMessage({type: 'primary', msg: 'Successfully added user'});
         }
       } catch(error) {
         console.error(error);
       } finally {
         setSubmitting(false);
+        setFormData(emptyFormData);
+        setTimeout(() => {
+          setFormMessage(emptyFormMessage);
+        }, 5000);
       }
     } else {
-      setFormMessage('Invalid data');
+      setFormMessage({type: 'secondary', msg: 'Invalid data'});
     }
   };
 
@@ -142,9 +151,9 @@ const UserForm = () => {
                     />
                   </Grid>
                 ))}
-                {formMessage && (
-                  <Typography color="error">
-                    {formMessage}
+                {formMessage.type && (
+                  <Typography color={formMessage.type}>
+                    {formMessage.msg}
                   </Typography>
                 )}
                 <br />
